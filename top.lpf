@@ -1,0 +1,28 @@
+# -----------------------------------------------------
+# --- Pines del Sistema ---
+# -----------------------------------------------------
+
+# Reloj de 25MHz
+LOCATE COMP "clk" SITE "P6";
+IOBUF PORT "clk" IO_TYPE=LVCMOS33;
+FREQUENCY PORT "clk" 25 MHZ;
+
+# LED de la placa (T6)
+LOCATE COMP "led" SITE "T6";
+IOBUF PORT "led" IO_TYPE=LVCMOS33;
+
+# -----------------------------------------------------
+# --- NUEVOS PINES para el Controlador del Servo ---
+# -----------------------------------------------------
+
+# Botón S1 (K16) como reset (activo en bajo)
+LOCATE COMP "reset_n" SITE "C4";
+IOBUF PORT "reset_n" IO_TYPE=LVCMOS33 PULLMODE=UP;  # PULLMODE=UP es clave para un botón activo en bajo
+
+# DIP Switch 1 (L15) como comando del banderín
+LOCATE COMP "banderin_switch" SITE "E4";
+IOBUF PORT "banderin_switch" IO_TYPE=LVCMOS33;
+
+# Salida al pin de señal del servo (J8, Pin 1)
+LOCATE COMP "servo_pin_out" SITE "G13";
+IOBUF PORT "servo_pin_out" IO_TYPE=LVCMOS33;

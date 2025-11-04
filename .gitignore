@@ -1,0 +1,7 @@
+build/
+sim/
+*.log
+blink/
+
+# Ignorar archivos de simulación de ondas
+*.vcd
