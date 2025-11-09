@@ -59,8 +59,8 @@ Recibir (vía UART) el string del tiempo final enviado por la FPGA.
 **Tareas:**
 - [X] Desarrollar el módulo VHDL/Verilog de la FSM Principal (Estados: IDLE, READY, SET, GO, TIMING, FINISH).
 - [X] Desarrollar el módulo Contador de alta frecuencia (cronómetro).
-- Desarrollar el módulo Controlador de Display (Decodificador Binario-a-BCD, Decodificador BCD-a-7-Segmentos, y Módulo de Multiplexación/Refresco).
-- [ ]Desarrollar el módulo Transmisor UART para serializar el tiempo final.
+- [X] Desarrollar el módulo Controlador de Display (Decodificador Binario-a-BCD, Decodificador BCD-a-7-Segmentos, y Módulo de Multiplexación/Refresco).
+- [ ] Desarrollar el módulo Transmisor UART para serializar el tiempo final.
 
 **Entregable:** Código VHDL/Verilog simulado y verificado con testbenches que prueben todos los flujos y transiciones. Debe haberse simulado el sistema en iverilog / gtkwave.
 
@@ -68,9 +68,9 @@ Recibir (vía UART) el string del tiempo final enviado por la FPGA.
 ### Fase 2: Diseño e Implementación de Interfaz de Potencia
 
 **Tareas:**
-- [X]Seleccionar los componentes: LEDs de alta luminosidad, Transistores MOSFET (N-Channel) adecuados para la corriente y voltaje de los LEDs, y resistencias de gate, entre otros.
+- [X] Seleccionar los componentes: LEDs de alta luminosidad, Transistores MOSFET (N-Channel) adecuados para la corriente y voltaje de los LEDs, y resistencias de gate, entre otros.
 - [X] Diseñar el circuito esquemático de la placa "Driver". Esta placa recibirá las señales de control de 3.3V de la FPGA y las usará para conmutar la alimentación externa (ej. 12V/24V) de los segmentos del cartel.
-Diseño de PCB y ensamblaje de la placa Driver.
+- [ ] Diseño de PCB y ensamblaje de la placa Driver.
 
 **Entregable:** Placa de circuito impreso (PCB) funcional que aísla la lógica de la potencia.
 
@@ -80,15 +80,15 @@ Diseño de PCB y ensamblaje de la placa Driver.
 - [ ] Desarrollar el código C++ (Arduino) para la lógica del ESP32.
 Implementar la lectura de los botones físicos (set, reset) y la lógica de debounce por software.
 - [ ] Implementar la rutina de escucha del puerto serial (UART) para recibir el tiempo desde la FPGA.
-Implementar la lógica de conexión WiFi y el cliente HTTP para realizar la llamada a la API.
+- [ ] Implementar la lógica de conexión WiFi y el cliente HTTP para realizar la llamada a la API.
 
 **Entregable:** Código fuente del ESP32 capaz de conectarse a la API y enviar un tiempo de prueba.
 
 ### Fase 4: Integración y Pruebas
 
 **Tareas:**
-- [X]Conectar físicamente todos los componentes: Sensores -> FPGA, FPGA -> Drivers MOSFET -> Cartel LED, FPGA (Tx) -> ESP32 (Rx), ESP32 -> Botones.
-Cargar el bitstream (lógica compilada) a la FPGA.
+- [X] Conectar físicamente todos los componentes: Sensores -> FPGA, FPGA -> Drivers MOSFET -> Cartel LED, FPGA (Tx) -> ESP32 (Rx), ESP32 -> Botones.
+- [X] Cargar el bitstream (lógica compilada) a la FPGA.
 - [ ] Cargar el firmware al ESP32.
 - [ ] Realizar prueba End-to-End: Simular el paso del robot, verificar el semáforo, verificar el conteo en el cartel y confirmar que el dato llega al backend.
  
