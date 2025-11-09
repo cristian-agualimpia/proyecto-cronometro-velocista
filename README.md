@@ -1,2 +1,9 @@
-# proyecto-cronometro-velocista
-Proyecto final y práctica de laboratorio 3 electrónica digital 1 
+# Proyecto Cronómetro Velocista
+Proyecto final Electrónica digital 1.
+
+Integrantes:
+- Ana Maria Amaya Gómez
+- Cristian Esteban Agualimpia 
+- Cristian Yesid Vargas Losada
+
+# Contenido
