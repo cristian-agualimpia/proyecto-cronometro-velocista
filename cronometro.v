@@ -1,31 +1,59 @@
-/******************************************************************************
-*                                                                             *
-* Copyright 2016 myStorm Copyright and related                                *
-* rights are licensed under the Solderpad Hardware License, Version 0.51      *
-* (the “License”); you may not use this file except in compliance with        *
-* the License. You may obtain a copy of the License at                        *
-* http://solderpad.org/licenses/SHL-0.51. Unless required by applicable       *
-* law or agreed to in writing, software, hardware and materials               *
-* distributed under this License is distributed on an “AS IS” BASIS,          *
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or             *
-* implied. See the License for the specific language governing                *
-* permissions and limitations under the License.                              *
-*                                                                             *
-******************************************************************************/
+`timescale 1ns / 1ps
 
-`ifndef INIT
-`define INIT 25'd0
-`endif
-
-module cronometro (
-    input  clk,
-    output led
+module cronometro #(
+    parameter CLK_FREQ = 25_000_000, // Frecuencia del reloj (25MHz)
+    parameter CLK_FREQ_CENT = CLK_FREQ / 100
+) (
+    input wire clk,
+    input wire reset_timer,
+    input wire enable_timer, // Reloj principal de la FPGA,
+    output reg [5:0] segundos,  // sañida de segundos (0-4)
+    output reg [3:0] minutos, // Salida de segundos (0-63)
+    output reg [6:0] centesimas
 );
 
-  reg [24:0] count = `INIT;
+    // Registro para el pre-escalador (divisor de frecuencia)
+    // Necesita contar de 0 a (CLK_FREQ - 1)
+    // reg [$clog2(CLK_FREQ)-1:0] preset_cnt;
+    reg [$clog2(CLK_FREQ_CENT)-1:0] preset_cnt_cent;
 
-  assign led = count[24];
+    // Logica principal del contador
+always @(posedge clk) begin
+        if (reset_timer) begin
+            // Resetea todos los contadores
+            preset_cnt_cent <= 0;
+            segundos        <= 0;
+            minutos         <= 0;
+            centesimas      <= 0;
+        end
+        else if (enable_timer) begin
+            // 1. Comprobar si ha pasado 0.01s
+            if (preset_cnt_cent == CLK_FREQ_CENT - 1) begin
+                preset_cnt_cent <= 0;
 
-  always @(posedge clk) count <= count + 1;
-
+                // 2. INICIO DE LOGICA ANIDADA CORRECTA
+                if (centesimas == 99) begin
+                    centesimas <= 0;
+                    // 3. ANIDADO: Solo chequear segundos CUANDO centesimas se desborda
+                    if (segundos == 59) begin
+                        segundos <= 0;
+                        if (minutos != 9) begin // Limite 9 minutos
+                            minutos <= minutos + 1'b1;
+                        end
+                    end
+                    else begin
+                        segundos <= segundos + 1'b1;
+                    end
+                end
+                else begin
+                    centesimas <= centesimas + 1'b1;
+                end
+                // --- FIN DE LOGICA ANIDADA CORRECTA ---
+            end
+            else begin
+                // 4. Incrementar pre-escalador
+                preset_cnt_cent <= preset_cnt_cent + 1'b1; 
+            end
+        end
+    end
 endmodule

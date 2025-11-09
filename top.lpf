@@ -1,28 +1,74 @@
-# -----------------------------------------------------
-# --- Pines del Sistema ---
-# -----------------------------------------------------
+# -----------------------------------------------
+# --- Asignaciones de Pines (Lattice .lpf)
+# --- Proyecto: Cronometro Velocista M:SS:tt
+# --- Placa: Colorlight V8.2
+# -----------------------------------------------
 
-# Reloj de 25MHz
-LOCATE COMP "clk" SITE "P6";
-IOBUF PORT "clk" IO_TYPE=LVCMOS33;
-FREQUENCY PORT "clk" 25 MHZ;
+# --- Pines EXISTENTES (de su top.v original) ---
+# (Total: 5 pines)
+LOCATE COMP "clk"             SITE "P6";  # Reloj 25MHz
+LOCATE COMP "reset_n"         SITE "C4"; # Boton S1 (Activo-bajo)
+LOCATE COMP "banderin_switch" SITE "D4"; # Switch SW1 (Mapeado a SET)
+LOCATE COMP "led"             SITE "T6";  # LED de Debug
+LOCATE COMP "servo_pin_out"   SITE "E4";  # Salida al Servo
 
-# LED de la placa (T6)
-LOCATE COMP "led" SITE "T6";
-IOBUF PORT "led" IO_TYPE=LVCMOS33;
+# -----------------------------------------------
+# --- Pines NUEVOS (DEBEN ASIGNARSE) ---
+# (Total: 17 pines)
+# -----------------------------------------------
 
-# -----------------------------------------------------
-# --- NUEVOS PINES para el Controlador del Servo ---
-# -----------------------------------------------------
+# --- Entrada (1) ---
+LOCATE COMP "sensor_meta"     SITE "F1"; # Ej: P16
 
-# Botón S1 (K16) como reset (activo en bajo)
-LOCATE COMP "reset_n" SITE "C4";
-IOBUF PORT "reset_n" IO_TYPE=LVCMOS33 PULLMODE=UP;  # PULLMODE=UP es clave para un botón activo en bajo
+# --- Semaforo (3) ---
+LOCATE COMP "led_rojo"        SITE "C1"; # Ej: R16
+LOCATE COMP "led_amarillo"    SITE "D1"; # Ej: T15
+LOCATE COMP "led_verde"       SITE "E2"; # Ej: T14 (Este pin controla LED Verde Y Buzzer)
 
-# DIP Switch 1 (L15) como comando del banderín
-LOCATE COMP "banderin_switch" SITE "E4";
+# --- Actuadores (1) ---
+LOCATE COMP "uart_tx"         SITE "F2"; # Ej: R14
+
+# --- Display Segmentos (7) - {g,f,e,d,c,b,a} ---
+# (El orden [6:0] depende de su modulo bcd_to_7seg)
+LOCATE COMP "display_segmentos[0]" SITE "H15"; # Seg A
+LOCATE COMP "display_segmentos[1]" SITE "H14"; # Seg B
+LOCATE COMP "display_segmentos[2]" SITE "G16"; # Seg C
+LOCATE COMP "display_segmentos[3]" SITE "F16"; # Seg D
+LOCATE COMP "display_segmentos[4]" SITE "P13"; # Seg E
+LOCATE COMP "display_segmentos[5]" SITE "N12"; # Seg F
+LOCATE COMP "display_segmentos[6]" SITE "N13"; # Seg G
+
+# --- Display Anodos (5) - {M, S, S, t, t} ---
+# (El orden [4:0] depende de su modulo mux_refresco)
+LOCATE COMP "display_anodos[0]"    SITE "G2"; # Anodo Centesimas-U
+LOCATE COMP "display_anodos[1]"    SITE "G1"; # Anodo Centesimas-D
+LOCATE COMP "display_anodos[2]"    SITE "H2"; # Anodo Segundos-U
+LOCATE COMP "display_anodos[3]"    SITE "K5"; # Anodo Segundos-D
+LOCATE COMP "display_anodos[4]"    SITE "K4"; # Anodo Minutos
+
+# -----------------------------------------------
+# --- Estandares de Voltaje (IO) ---
+# -----------------------------------------------
+# (Asumiendo que todos son 3.3V)
+IOBUF PORT "clk"             IO_TYPE=LVCMOS33;
+IOBUF PORT "reset_n"         IO_TYPE=LVCMOS33;
 IOBUF PORT "banderin_switch" IO_TYPE=LVCMOS33;
-
-# Salida al pin de señal del servo (J8, Pin 1)
-LOCATE COMP "servo_pin_out" SITE "G13";
-IOBUF PORT "servo_pin_out" IO_TYPE=LVCMOS33;
+IOBUF PORT "sensor_meta"     IO_TYPE=LVCMOS33;
+IOBUF PORT "led"             IO_TYPE=LVCMOS33;
+IOBUF PORT "servo_pin_out"   IO_TYPE=LVCMOS33;
+IOBUF PORT "led_rojo"        IO_TYPE=LVCMOS33;
+IOBUF PORT "led_amarillo"    IO_TYPE=LVCMOS33;
+IOBUF PORT "led_verde"       IO_TYPE=LVCMOS33;
+IOBUF PORT "uart_tx"         IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[0]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[1]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[2]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[3]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[4]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[5]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_segmentos[6]" IO_TYPE=LVCMOS33;
+IOBUF PORT "display_anodos[0]"    IO_TYPE=LVCMOS33;
+IOBUF PORT "display_anodos[1]"    IO_TYPE=LVCMOS33;
+IOBUF PORT "display_anodos[2]"    IO_TYPE=LVCMOS33;
+IOBUF PORT "display_anodos[3]"    IO_TYPE=LVCMOS33;
+IOBUF PORT "display_anodos[4]"    IO_TYPE=LVCMOS33;
