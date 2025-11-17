@@ -15,22 +15,23 @@ module servo_pwm (
 
     // --- Parámetros de Configuración (Fáciles de ajustar) ---
     // (Corregido para warnings de linter)
-    parameter integer CLK_FREQ_HZ = 25_000_000; // 25 MHz
+    localparam integer CLK_FREQ_HZ = 25_000_000; // 25 MHz
 
     // Periodo total del ciclo PWM para el servo (50 Hz = 20 ms)
-    parameter integer SERVO_PERIOD_MS = 20;
-    parameter integer SERVO_PERIOD_CLKS = (CLK_FREQ_HZ * SERVO_PERIOD_MS) / 1000; // 500_000 clks
+    localparam integer SERVO_PERIOD_MS = 20;
+    localparam integer SERVO_PERIOD_CLKS = (CLK_FREQ_HZ * SERVO_PERIOD_MS) / 1000; // 500_000 clks
 
     // Duración del pulso para 0 grados (Bajar) en ms
-    parameter integer PULSE_0DEG_MS = 1.0; // Usar 'real' para números con decimales
-    parameter integer PULSE_0DEG_CLKS = (CLK_FREQ_HZ * PULSE_0DEG_MS) / 1000; // 25_000 clks
+    localparam integer PULSE_0DEG_MS = 1.0; // Usar 'real' para números con decimales
+    localparam integer PULSE_0DEG_CLKS = (CLK_FREQ_HZ * PULSE_0DEG_MS) / 1000; // 25_000 clks
 
     // Duración del pulso para 90 grados (Subir) en ms
-    parameter real PULSE_90DEG_MS = 1.5; // Usar 'real' para números con decimales
-    parameter integer PULSE_90DEG_CLKS = (CLK_FREQ_HZ * PULSE_90DEG_MS) / 1000; // 37_500 clks
+    localparam isnteger PULSE_90DEG_MS = 1.5; // Usar 'real' para números con decimales
+    localparam integer PULSE_90DEG_CLKS = (CLK_FREQ_HZ * PULSE_90DEG_MS) / 1000; // 37_500 clks
 
     // Ancho en bits para nuestros contadores.
-    parameter integer COUNTER_BITS = 19;
+    localparam integer COUNTER_BITS = 19; 
+    
     // --- Bloque 1: Generador de Base de Tiempo (Contador Cíclico) ---
     reg [COUNTER_BITS-1:0] count_periodo;
 
