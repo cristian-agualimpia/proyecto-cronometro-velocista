@@ -6,8 +6,8 @@
 module cronometro_tb;
 
     // Parametros del testbench
-    parameter CLK_FREQ = 25_000_000; // 25MHz
-    parameter CLK_PERIOD = 40;       // Periodo del reloj en ns (1 / 25MHz)
+    parameter integer CLK_FREQ = 25_000_000; // 25MHz
+    parameter integer CLK_PERIOD = 40;       // Periodo del reloj en ns (1 / 25MHz)
 
     // Señales
     reg clk;
@@ -50,12 +50,10 @@ module cronometro_tb;
         // Habilitar el contador por 62 segundos (tiempo simulado)
         $display("T=%0t: Habilitando timer...", $time);
         enable_timer = 1;
-        
         // CORRECCION AQUI:
         // Espera 62 segundos. La timescale es 1ns.
         // 62 segundos = 62,000,000,000 ns
-        #(62_000_000_000); 
-        
+        #(62_000_000_000);
         $display("T=%0t: Timer habilitado por 62s. Resultado: %d:%d", $time, minutos, segundos);
 
         // Deshabilitar el contador por 10 segundos
@@ -69,7 +67,6 @@ module cronometro_tb;
         enable_timer = 1;
         #(5_000_000_000); // Espera 5s
         $display("T=%0t: Timer rehabilitado por 5s. Resultado: %d:%d", $time, minutos, segundos);
-        
         // Finalizar simulacion
         $display("T=%0t: Fin del test.", $time);
         $finish;

@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module cronometro #(
-    parameter CLK_FREQ = 25_000_000, // Frecuencia del reloj (25MHz)
-    parameter CLK_FREQ_CENT = CLK_FREQ / 100
+    parameter integer CLK_FREQ = 25_000_000, // Frecuencia del reloj (25MHz)
+    parameter integer CLK_FREQ_CENT = CLK_FREQ / 100
 ) (
     input wire clk,
     input wire reset_timer,
@@ -52,7 +52,7 @@ always @(posedge clk) begin
             end
             else begin
                 // 4. Incrementar pre-escalador
-                preset_cnt_cent <= preset_cnt_cent + 1'b1; 
+                preset_cnt_cent <= preset_cnt_cent + 1'b1;
             end
         end
     end

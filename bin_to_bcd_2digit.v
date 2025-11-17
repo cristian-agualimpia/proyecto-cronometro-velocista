@@ -4,7 +4,6 @@
  */
 module bin_to_bcd_2digit (
     input wire [6:0] bin_in, // Entrada binaria (0-99)
-    
     output reg [3:0] bcd_decenas,  // Decenas BCD
     output reg [3:0] bcd_unidades  // Unidades BCD
 );
@@ -24,7 +23,6 @@ module bin_to_bcd_2digit (
         // Bucle "Double Dabble" (combinacional)
         // Se repite 7 veces (ancho de bits de entrada)
         for (i = 0; i < 7; i = i + 1) begin
-            
             // 1. Ajustar si la columna > 4
             if (bcd_ones >= 5) begin
                 bcd_ones = bcd_ones + 3;
@@ -32,7 +30,6 @@ module bin_to_bcd_2digit (
             if (bcd_tens >= 5) begin
                 bcd_tens = bcd_tens + 3;
             end
-            
             // 2. Desplazar todo a la izquierda 1 bit
             bcd_tens  = {bcd_tens[2:0], bcd_ones[3]};
             bcd_ones  = {bcd_ones[2:0], shift_reg[6]};

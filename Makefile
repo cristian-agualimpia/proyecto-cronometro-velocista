@@ -2,7 +2,7 @@ help: help-sim help-syn
 clean: clean-syn clean-sim
 # top=top y servo=servo_pwm
 DESIGN=top.v
-VERILOG_SOURCES = top.v cronometro.v fsm_control.v debounce.v uart_tx.v uart_time_tx.v control_display.v bcdto7seg.v bin_to_bcd_2digit.v mux_5digit.v servo_pwm.v
+VERILOG_SOURCES = top.v debounce.v fsm_control.v cronometro.v control_display.v uart_tx.v uart_time_tx.v bcdto7seg.v bin_to_bcd_2digit.v mux_5digit.v servo_pwm.v
 #test bench del proyecto para la simulación
 tb?=./cronometro_tb.v
 DIR_BUILD=build

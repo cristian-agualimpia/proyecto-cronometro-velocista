@@ -61,7 +61,7 @@ module uart_time_tx (
         end 
         else begin
             // Por defecto, no iniciar transmision
-            uart_start_tx <= 1'b0; 
+            uart_start_tx <= 1'b0;
             
             case(state)
                 S_IDLE: 
@@ -73,8 +73,7 @@ module uart_time_tx (
                         state  <= S_SEND_MIN;
                     end
                 
-                // --- CORRECCION ---
-                // Se agrego el 'begin...end'
+                // Se agrego el 'begin...end' (esto estaba bien en tu archivo)
                 S_SEND_MIN: begin
                     uart_start_tx <= 1'b1; // Inicia envio de 1 byte
                     uart_data_byte <= {4'b0, r_min}; // Carga el byte

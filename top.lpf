@@ -10,7 +10,7 @@ LOCATE COMP "clk"             SITE "P6";  # Reloj 25MHz
 LOCATE COMP "reset_n"         SITE "C4"; # Boton S1 (Activo-bajo)
 LOCATE COMP "banderin_switch" SITE "D4"; # Switch SW1 (Mapeado a SET)
 LOCATE COMP "led"             SITE "T6";  # LED de Debug
-LOCATE COMP "servo_pin_out"   SITE "E4";  # Salida al Servo
+LOCATE COMP "servo_pin_out"   SITE "F1";  # Salida al Servo
 
 # -----------------------------------------------
 # --- Pines NUEVOS (DEBEN ASIGNARSE) ---
@@ -18,7 +18,7 @@ LOCATE COMP "servo_pin_out"   SITE "E4";  # Salida al Servo
 # -----------------------------------------------
 
 # --- Entrada (1) ---
-LOCATE COMP "sensor_meta"     SITE "F1"; # Ej: P16
+LOCATE COMP "sensor_meta"     SITE "E4"; # Ej: P16
 
 # --- Semaforo (3) ---
 LOCATE COMP "led_rojo"        SITE "C1"; # Ej: R16

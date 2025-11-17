@@ -6,30 +6,26 @@
  */
 module fsm_control #(
     parameter CLK_FREQ = 25_000_000,
-    parameter COUNT_READY = CLK_FREQ * 2, // 2 segundos
-    parameter COUNT_SET   = CLK_FREQ * 2, // 2 segundos
-    parameter COUNT_GO    = CLK_FREQ * 1  // 1 segundo
+    parameter COUNT_READY = CLK_FREQ * 2,// 2 segundos
+    parameter COUNT_SET   = CLK_FREQ * 2,// 2 segundos
+    parameter COUNT_GO    = CLK_FREQ * 1// 1 segundo
 ) (
     input wire clk,
     input wire reset_global,
-    
     input wire set_button_in,
     input wire sensor_meta_in,
-    
     // Salidas al cronometro.v
     output reg reset_timer_out,
     output reg enable_timer_out,
-    
     // Salidas a los actuadores
     output reg [2:0] semaforo_out, // {Verde, Amarillo, Rojo}
     // 'buzzer_out' ELIMINADO
     output reg servo_out,
-    
     output reg start_uart_tx_out
 );
 
     // --- 1. Definicion de Estados ---
-    localparam [2:0] 
+    parameter [2:0]
         S_IDLE   = 3'd0,
         S_READY  = 3'd1,
         S_SET    = 3'd2,
@@ -43,7 +39,6 @@ module fsm_control #(
     // ... (Detector de Flanco) ...
     // ... (Timer Local) ...
     // ... (Logica de Transicion de Estado) ...
-    
     // (Ahorro espacio omitiendo las partes no modificadas)
 
     // --- 5. Logica de Salida (Combinacional) ---
@@ -78,9 +73,8 @@ module fsm_control #(
                 enable_timer_out  = 1'b0;
                 start_uart_tx_out = 1'b1;
             end
+            default enable_timer_out = 0;
         endcase
     end
-    
     // ... (Registro de Estado) ...
-    
 endmodule
