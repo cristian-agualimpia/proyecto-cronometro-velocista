@@ -26,7 +26,7 @@ module servo_pwm (
     localparam integer PULSE_0DEG_CLKS = (CLK_FREQ_HZ * PULSE_0DEG_MS) / 1000; // 25_000 clks
 
     // Duración del pulso para 90 grados (Subir) en ms
-    localparam isnteger PULSE_90DEG_MS = 1.5; // Usar 'real' para números con decimales
+    localparam integer PULSE_90DEG_MS = 1.5; // Usar 'real' para números con decimales
     localparam integer PULSE_90DEG_CLKS = (CLK_FREQ_HZ * PULSE_90DEG_MS) / 1000; // 37_500 clks
 
     // Ancho en bits para nuestros contadores.
